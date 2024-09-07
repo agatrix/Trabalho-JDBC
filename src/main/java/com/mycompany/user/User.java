@@ -76,11 +76,7 @@ public class User extends Entity{
         return ultimoAcesso;
     }
 
-    public void setUltimoAcesso(LocalDateTime ultimoAcesso) {
-        
-        if(senha == null)
-            throw new IllegalArgumentException("Valor nulo");
-        
+    public void setUltimoAcesso(LocalDateTime ultimoAcesso) {        
         this.ultimoAcesso = ultimoAcesso;
     }
 

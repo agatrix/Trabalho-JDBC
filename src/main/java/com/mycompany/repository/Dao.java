@@ -135,6 +135,7 @@ public abstract class Dao<T extends Entity>
 
         return null;
     }
+    
 
     @Override
     public List<T> extractObjects(ResultSet resultSet) {

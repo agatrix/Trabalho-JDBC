@@ -13,18 +13,21 @@ public class UserAcesso {
     public static void main(String[] args) {
     
         User u1 = null;
+        User u2 = null;
         
         try{
-            u1 = new User("marcos","h@mail.cm","123",LocalDateTime.now());
+            u1 = new User("heuller","h@mail.cm","123",LocalDateTime.now());
+            u1.setId(1L);
+            u1.setAtivo(false);
+            u2 = new User("marcos","m@mail.cm","435",LocalDateTime.of(2023, 9, 7, 14, 30));
 
-            System.out.println(u1);
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
        
         if(u1 != null){
             new UserDao().saveOrUpdate(u1);
-            System.out.println(new UserDao().findById(1L));
+            System.out.println(new UserDao().findALLAtivo());
         }
         
     }

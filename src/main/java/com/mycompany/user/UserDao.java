@@ -2,12 +2,10 @@ package com.mycompany.user;
 
 import com.mycompany.repository.Dao;
 import com.mycompany.repository.DbConnection;
-import com.mycompany.user.User;
-import java.awt.desktop.UserSessionEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.logging.Level;
@@ -59,7 +57,7 @@ public class UserDao extends Dao<User>{
             // LocalDate
             pstmt.setString(3, e.getSenha());
             
-            pstmt.setObject(4,e.getUltimoAcesso(), java.sql.Types.DATE);
+            pstmt.setTimestamp(4, Timestamp.valueOf(e.getUltimoAcesso()));
             
             pstmt.setBoolean(5, e.isAtivo());
 
@@ -81,27 +79,11 @@ public class UserDao extends Dao<User>{
 
     @Override
     public String getFindAllStatment() {
-        return "select id, descricao, progresso, conclusao, excluido"
-                + " from tarefa"
-                + " where exlcuido = false";
+        return "select id, nome, email, senha, ultimoAcesso, ativo"
+                + " from "+ TABLE;
     }
-
-    @Override
-    public String getMoveToTrashStatement() {
-        return "update " + TABLE + " set excluido = true"
-                + " where id = ?";
-    }
-
-    @Override
-    public String getRestoreFromTrashStatement() {
-        return "update " + TABLE + " set excluido = false"
-                + " where id = ?";
-    }
-
-    @Override
-    public String getFindAllOnTrashStatement() {
-        return "select * from " + TABLE + " where excluido = true";
-    }
+    
+   
 
     @Override
     public User extractObject(ResultSet resultSet) {
@@ -124,12 +106,13 @@ public class UserDao extends Dao<User>{
 
         return user;
     }
-
-    public List<User> findByProgressLessThan20() {
+    
+    public List<User> findALLAtivo() {
         
         final String SQL = "select *"
                 + " from " + TABLE 
-                + " where progresso < 20";
+                + " where ativo"
+                + " like true";
         
         try ( PreparedStatement preparedStatement
                 = DbConnection.getConnection().prepareStatement(SQL)) {
@@ -148,49 +131,6 @@ public class UserDao extends Dao<User>{
         }
 
         return null;
-    }
-
-    public List<User> findByDescription(String description) {
-        
-        final String SQL = "select *"
-                + " from " + TABLE 
-                + " where descricao"
-                + " like ?";
-        
-        try ( PreparedStatement preparedStatement
-                = DbConnection.getConnection().prepareStatement(SQL)) {
-
-            preparedStatement.setString(1, "%" + description + "%");
-
-            // Show the full sentence
-            System.out.println(">> SQL: " + preparedStatement);
-
-            // Performs the query on the database
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            // Returns the respective object
-            return extractObjects(resultSet);
-
-        } catch (Exception ex) {
-            System.out.println("Exception: " + ex);
-        }
-
-        return null;
-    }
-
-    @Override
-    public void moveToTrash(User e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void restoreFromTrash(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public List<User> findAllOnTrash() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }
