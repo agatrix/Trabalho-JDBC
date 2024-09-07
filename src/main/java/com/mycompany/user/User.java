@@ -1,7 +1,7 @@
 package com.mycompany.user;
 
 import com.mycompany.entity.Entity;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -12,14 +12,14 @@ public class User extends Entity{
     private String name;
     private String email;
     private String senha;
-    private LocalDate ultimoAcesso;
+    private LocalDateTime ultimoAcesso;
     private boolean ativo = true;
 
     //Construtor Padrão
     public User(){}
     
     //Construtor Sobrecarregado
-    public User(String name, String email, String senha, LocalDate ultimoAcesso) throws Exception {
+    public User(String name, String email, String senha, LocalDateTime ultimoAcesso) throws Exception {
         
         setName(name);
         setEmail(email);
@@ -32,12 +32,12 @@ public class User extends Entity{
         return name;
     }
 
-    public void setName(String name) throws Exception{
+    public void setName(String name) {
         if(name == null)
-            throw new Exception("Valor nulo");
+            throw new IllegalArgumentException("Valor nulo");
         
         if(name.length()>150)
-            throw new Exception("Tamanho Excedido");
+            throw new IllegalArgumentException("Tamanho Excedido");
         
 
         
@@ -48,12 +48,12 @@ public class User extends Entity{
         return email;
     }
 
-    public void setEmail(String email) throws Exception {
+    public void setEmail(String email) {
         if(email == null)
-            throw new Exception("Valor nulo");
+            throw new IllegalArgumentException("Valor nulo");
         
         if(email.length()>255)
-            throw new Exception("Tamanho Excedido");
+            throw new IllegalArgumentException("Tamanho Excedido");
                
         this.email = email;
     }
@@ -62,24 +62,24 @@ public class User extends Entity{
         return senha;
     }
 
-    public void setSenha(String senha) throws Exception {
+    public void setSenha(String senha) {
         if(senha == null)
-            throw new Exception("Valor nulo");
+            throw new IllegalArgumentException("Valor nulo");
         
         if(senha.length()>64)
-            throw new Exception("Tamanho Excedido");
+            throw new IllegalArgumentException("Tamanho Excedido");
         
         this.senha = senha;
     }
 
-    public LocalDate getUltimoAcesso() {
+    public LocalDateTime getUltimoAcesso() {
         return ultimoAcesso;
     }
 
-    public void setUltimoAcesso(LocalDate ultimoAcesso) throws Exception {
+    public void setUltimoAcesso(LocalDateTime ultimoAcesso) {
         
         if(senha == null)
-            throw new Exception("Valor nulo");
+            throw new IllegalArgumentException("Valor nulo");
         
         this.ultimoAcesso = ultimoAcesso;
     }

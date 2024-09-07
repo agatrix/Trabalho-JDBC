@@ -3,10 +3,12 @@ package com.mycompany.user;
 import com.mycompany.repository.Dao;
 import com.mycompany.repository.DbConnection;
 import com.mycompany.user.User;
+import java.awt.desktop.UserSessionEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -73,8 +75,8 @@ public class UserDao extends Dao<User>{
 
     @Override
     public String getFindByIdStatment() {
-        return "select id, descricao, progresso, conclusao, excluido"
-                + " from tarefa where id = ?";
+        return "select id, nome, email, senha, ultimoAcesso, ativo"
+                + " from "+ TABLE +" where id = ?";
     }
 
     @Override
@@ -109,6 +111,12 @@ public class UserDao extends Dao<User>{
         try {
             user = new User();
             user.setId(resultSet.getLong("id"));
+            user.setName(resultSet.getString("nome"));
+            user.setEmail(resultSet.getString("email"));
+            user.setSenha(resultSet.getString("senha"));
+            user.setUltimoAcesso(
+                    resultSet.getObject("ultimoAcesso",LocalDateTime.class));
+            user.setAtivo(resultSet.getBoolean("ativo"));
             
         } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
