@@ -1,5 +1,7 @@
 package com.mycompany.useracesso;
+
 import com.mycompany.user.User;
+import com.mycompany.user.UserDao;
 import java.time.LocalDate;
 
 /**
@@ -20,7 +22,7 @@ public class UserAcesso {
         }
        
         if(u1 != null){
-            
+            new UserDao().saveOrUpdate(u1);
         }
         
     }

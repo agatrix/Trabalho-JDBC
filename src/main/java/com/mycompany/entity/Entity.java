@@ -7,12 +7,12 @@ package com.mycompany.entity;
  */
 public abstract class Entity {
     
-    private long id;
+    private Long id;
     private boolean excluido; //Utilizado para marcar item na lixeira
 
     //<editor-fold defaultstate="collapsed" desc="get/set">
     
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

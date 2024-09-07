@@ -1,3 +1,7 @@
-com\mycompany\entity\Entity.class
 com\mycompany\useracesso\UserAcesso.class
+com\mycompany\repository\Dao.class
+com\mycompany\user\UserDao.class
 com\mycompany\user\User.class
+com\mycompany\entity\Entity.class
+com\mycompany\repository\IDao.class
+com\mycompany\repository\DbConnection.class

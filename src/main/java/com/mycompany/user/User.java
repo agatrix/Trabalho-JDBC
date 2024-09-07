@@ -15,6 +15,10 @@ public class User extends Entity{
     private LocalDate ultimoAcesso;
     private boolean ativo = true;
 
+    //Construtor Padrão
+    public User(){}
+    
+    //Construtor Sobrecarregado
     public User(String name, String email, String senha, LocalDate ultimoAcesso) throws Exception {
         
         setName(name);
