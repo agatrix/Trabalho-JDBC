@@ -1,1 +1,3 @@
+com\mycompany\entity\Entity.class
 com\mycompany\useracesso\UserAcesso.class
+com\mycompany\user\User.class
