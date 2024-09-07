@@ -32,12 +32,15 @@ public class UserDao extends Dao<User>{
 
     @Override
     public String getSaveStatment() {
-        return "insert into " + TABLE + "(nome, email, senha, ultimoAcesso, ativo)  values (?, ?, ?, ?, ?)";
+        return "insert into " + TABLE + "(nome, email, senha, ultimoAcesso, ativo)"
+                + " values (?, ?, ?, ?, ?)";
     }
 
     @Override
     public String getUpdateStatment() {
-        return "update " + TABLE + " set descricao = ?, progresso = ?, conclusao = ? where id = ?";
+        return "update " + TABLE + " set nome = ?, email = ?, senha = ?,"
+                + " ultimoAcesso = ?, ativo = ?"
+                + " where id = ?";
     }
 
     @Override
@@ -60,7 +63,7 @@ public class UserDao extends Dao<User>{
 
             // Just for the update
             if (e.getId() != null) {
-                pstmt.setLong(4, e.getId());
+                pstmt.setLong(6, e.getId());
             }
 
         } catch (SQLException ex) {
