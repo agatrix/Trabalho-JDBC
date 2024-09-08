@@ -31,7 +31,6 @@ public interface IDao<T extends Entity> {
 
     public List<T> findAll();
     
-    // Assembly objects
     public T extractObject(ResultSet resultSet);
 
     public List<T> extractObjects(ResultSet resultSet);

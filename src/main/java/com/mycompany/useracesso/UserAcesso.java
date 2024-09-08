@@ -65,9 +65,6 @@ public class UserAcesso {
         if(A != null){
               A.setUltimoAcesso(LocalDateTime.now());
               new UserDao().saveOrUpdate(A);
-//            
-//            new UserDao().excluirUserbyID(3L);
-//            System.out.println(new UserDao().findALLAtivo());
         }
         if(C != null){
             C.setAtivo(false);

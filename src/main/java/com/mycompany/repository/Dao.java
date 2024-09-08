@@ -55,7 +55,7 @@ public abstract class Dao<T extends Entity>
 
                     // Retrieve the returned primary key
                     id = resultSet.getLong(1);
-                    e.setId(id);
+                    e.setId(id); //Inserimos o ID ao objeto para atualizar
                 }
 
             } catch (Exception ex) {

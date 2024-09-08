@@ -47,21 +47,16 @@ public class UserDao extends Dao<User>{
     public void composeSaveOrUpdateStatement(PreparedStatement pstmt, User e) {
         try {
             pstmt.setString(1, e.getName());
-            // OR
-            // pstmt.setObject(1, e.getDescription(), java.sql.Types.VARCHAR);
-
-            // Null values
-            // NOT! pstmt.setByte(2, e.getProgress());
+            
             pstmt.setString(2, e.getEmail());
 
-            // LocalDate
             pstmt.setString(3, e.getSenha());
             
             pstmt.setObject(4, e.getUltimoAcesso());
             
             pstmt.setBoolean(5, e.isAtivo());
 
-            // Just for the update
+            // Apenas para caso precise atualizar
             if (e.getId() != null) {
                 pstmt.setLong(6, e.getId());
             }
