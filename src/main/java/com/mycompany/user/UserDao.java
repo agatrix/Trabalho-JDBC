@@ -57,7 +57,7 @@ public class UserDao extends Dao<User>{
             // LocalDate
             pstmt.setString(3, e.getSenha());
             
-            pstmt.setTimestamp(4, Timestamp.valueOf(e.getUltimoAcesso()));
+            pstmt.setObject(4, e.getUltimoAcesso());
             
             pstmt.setBoolean(5, e.isAtivo());
 

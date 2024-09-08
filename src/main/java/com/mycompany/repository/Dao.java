@@ -32,12 +32,12 @@ public abstract class Dao<T extends Entity>
                 || e.getId() <= 0) {
 
             // Insert a new register
-            // try-with-resources
+            // try-with-resources            
             try ( PreparedStatement preparedStatement
                     = DbConnection.getConnection().prepareStatement(
                             getSaveStatment(),
                             Statement.RETURN_GENERATED_KEYS)) {
-
+                
                 // Assemble the SQL statement with the data (->?)
                 composeSaveOrUpdateStatement(preparedStatement, e);
 
@@ -55,6 +55,7 @@ public abstract class Dao<T extends Entity>
 
                     // Retrieve the returned primary key
                     id = resultSet.getLong(1);
+                    e.setId(id);
                 }
 
             } catch (Exception ex) {

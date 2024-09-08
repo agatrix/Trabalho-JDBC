@@ -12,7 +12,7 @@ public class User extends Entity{
     private String name;
     private String email;
     private String senha;
-    private LocalDateTime ultimoAcesso;
+    private LocalDateTime ultimoAcesso; //Por ser um Objeto, inicia em NULL
     private boolean ativo = true;
 
     //Construtor Padrão
@@ -25,6 +25,8 @@ public class User extends Entity{
         setEmail(email);
         setSenha(senha);
         setUltimoAcesso(ultimoAcesso);
+        if(this.ultimoAcesso == null)
+            setAtivo(false);
         
     }
 
