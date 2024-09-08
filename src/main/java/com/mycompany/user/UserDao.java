@@ -19,9 +19,9 @@ import java.util.logging.Logger;
  * nome varchar(150) not null,
  * email varchar(255) not null,
  * senha varchar(64) not null,
- * ultimoAcesso date not null,
- * ativo booleano default true,
- * PRIMARY KEY (`id`)
+ * ultimoAcesso datetime not null,
+ * ativo tinyint(1) default 1,   
+ * PRIMARY KEY (id)
  * );
  * 
  * </code>
@@ -83,7 +83,10 @@ public class UserDao extends Dao<User>{
                 + " from "+ TABLE;
     }
     
-   
+    @Override
+    public String getExcluirUserStatment() {
+        return "delete from "+ TABLE +" where id = ?" ;
+    }
 
     @Override
     public User extractObject(ResultSet resultSet) {
@@ -107,6 +110,11 @@ public class UserDao extends Dao<User>{
         return user;
     }
     
+    /**
+     * Como "Ativo" é apenas um atributo do User, optamos
+     * por criar ométodo dentro do UserDao
+     * @return 
+     */
     public List<User> findALLAtivo() {
         
         final String SQL = "select *"

@@ -8,6 +8,7 @@ import java.util.List;
 /**
  *
  * @author gusta
+ * @param <T>
  */
 public interface IDao<T extends Entity> {
 
@@ -34,5 +35,9 @@ public interface IDao<T extends Entity> {
     public T extractObject(ResultSet resultSet);
 
     public List<T> extractObjects(ResultSet resultSet);
+    
+    // Deletar usuario por ID
+    public String getExcluirUserStatment();
+    public T excluirUserbyID(Long id);
 
 }

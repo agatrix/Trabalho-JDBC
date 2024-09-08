@@ -17,8 +17,6 @@ public class UserAcesso {
         
         try{
             u1 = new User("heuller","h@mail.cm","123",LocalDateTime.now());
-            u1.setId(1L);
-            u1.setAtivo(false);
             u2 = new User("marcos","m@mail.cm","435",LocalDateTime.of(2023, 9, 7, 14, 30));
 
         }catch(Exception e){
@@ -26,7 +24,9 @@ public class UserAcesso {
         }
        
         if(u1 != null){
-            new UserDao().saveOrUpdate(u1);
+            //new UserDao().saveOrUpdate(u1);
+            new UserDao().findById(2L);
+            new UserDao().excluirUserbyID(3L);
             System.out.println(new UserDao().findALLAtivo());
         }
         

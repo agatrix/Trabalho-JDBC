@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 /**
- *
+ * Classe Dao responsável por implementar o IDao
  * @author gusta
+ * @param <T>
  */
 public abstract class Dao<T extends Entity>
         implements IDao<T> {
@@ -97,7 +99,7 @@ public abstract class Dao<T extends Entity>
 
             // Show the full sentence
             System.out.println(">> SQL: " + preparedStatement);
-
+            
             // Performs the query on the database
             ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -151,5 +153,28 @@ public abstract class Dao<T extends Entity>
 
         return objects.isEmpty() ? null : objects;
     }
+    
+    //Metodo pra excluir do banco de dados
+    @Override
+    public T excluirUserbyID(Long id) {
 
+        try ( PreparedStatement preparedStatement
+                = DbConnection.getConnection().prepareStatement(
+                        getExcluirUserStatment())) {
+
+            // Assemble the SQL statement with the id
+            preparedStatement.setLong(1, id);
+
+            // Show the full sentence
+            System.out.println(">> SQL: " + preparedStatement);
+
+           // Performs the update on the database
+           preparedStatement.executeUpdate();
+
+        } catch (Exception ex) {
+            System.out.println("Exception: " + ex);
+        }
+
+        return null;
+    }
 }
